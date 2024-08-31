@@ -1,0 +1,19 @@
+import pandas as pd
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv("/Users/ta/My Computer/Data Project/Youtube Data Project/youtube_data_united-kingdom.csv")
+
+# Split the 'NAME' column into two columns: 'Name' and 'User Name'
+df[['Name', 'User Name']] = df['NAME'].str.split(' ', n=1, expand=True)
+
+# Drop unnecessary columns
+df = df.drop(['INVITAR A LA CAMPAÑA', 'GUARDAR'], axis=1)
+
+# Set display options to show all rows
+pd.set_option('display.max_rows', None)
+
+# Print the modified DataFrame with all rows and columns visible
+print(df[['User Name']])
+
+# Save the DataFrame to a new CSV file
+df.to_csv("/Users/ta/My Computer/Data Project/Youtube Data Project/new_data_yt.csv", index=False)
